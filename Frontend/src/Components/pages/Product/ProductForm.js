@@ -85,7 +85,7 @@ const ProductForm = ({ productData, getProductsData }) => {
   return (
     <div>
       <Button
-        colorScheme="blue"
+        colorScheme="teal"
         onClick={onOpen}
         rightIcon={productData ? <EditIcon mb={1} /> : <AddIcon mb={1} />}
       >

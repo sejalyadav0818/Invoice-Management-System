@@ -102,7 +102,7 @@ const AddJob = ({ getJObData }) => {
       })
       .catch((error) => {
         toast({
-          title: error.response.data.message,
+          title: error.message,
           status: "error",
           isClosable: true,
           position: "bottom",

@@ -11,6 +11,7 @@ import {
   Flex,
   Spinner,
   Heading,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import AddJob from "./AddJob";
@@ -19,6 +20,7 @@ import EditJob from "./EditJob";
 import Pagination from "../../../Common/Pagination";
 
 const JobProductDashboard = () => {
+  const toast = useToast();
   const [jobData, setjobData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setcurrentPage] = useState(1);
@@ -47,6 +49,7 @@ const JobProductDashboard = () => {
       .get("http://localhost:5000/job")
       .then((res) => {
         const jobs = res.data.data;
+        console.log(jobs, "dakjewdkjqwjdkqw");
         setjobData(jobs);
         setLoading(false);
       })
@@ -55,13 +58,29 @@ const JobProductDashboard = () => {
 
   const convertToInvoice = (jobId) => {
     axios
-      .post(`http://localhost:5000/convert-to-invoice/${jobId}`)
+      .post(`http://localhost:5000/invoice/convert-to-invoice/${jobId}`)
       .then((res) => {
         getJObData();
+        toast({
+          title: res.data.message,
+          status: "success",
+          isClosable: true,
+          position: "bottom",
+          duration: 5000,
+        });
+        onClose();
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        toast({
+          title: error.message,
+          status: "error",
+          isClosable: true,
+          position: "bottom",
+          duration: 5000,
+        });
+        onClose();
+      });
   };
-
   useEffect(() => {
     axios.get("http://localhost:5000/product").then((response) => {
       setProducts(response.data.data);
@@ -81,7 +100,7 @@ const JobProductDashboard = () => {
     <>
       {" "}
       <Box display="flex" justifyContent="center" alignItems="center" mt="10">
-        <AddJob getProductsData={getJObData} />
+        <AddJob getJObData={getJObData} />
       </Box>{" "}
       <Box display="flex" justifyContent="center" alignItems="center" mt="10">
         <div>
@@ -155,7 +174,7 @@ const JobProductDashboard = () => {
             </>
           ) : (
             <Heading as="h3" size="lg" my="10">
-              No products found!!
+              No Jobs found!!
             </Heading>
           )}
         </div>

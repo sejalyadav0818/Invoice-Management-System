@@ -1,11 +1,20 @@
-import { Box, Heading, Text, Divider, Button, Image, Flex } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Text,
+  Divider,
+  Button,
+  Image,
+  Flex,
+} from "@chakra-ui/react";
 
 const InvoiceCard = ({ invoiceData, onDownload, onDelete }) => {
-  const { title, product, notes, tax, subtotal, total, productImage } = invoiceData;
+  const { title, product, notes, tax, subtotal, total, productImage } =
+    invoiceData;
 
   return (
     <Box borderWidth="1px" borderRadius="md" p="4" mb="4">
-      <Heading as="h1" size="md" mb="2">
+      <Heading as="h1" size="md" mb="2" fontWeight="bold">
         Invoice Details
       </Heading>
       <Text>
@@ -17,14 +26,7 @@ const InvoiceCard = ({ invoiceData, onDownload, onDelete }) => {
       <Text>
         <strong>Notes:</strong> {notes}
       </Text>
-      <Flex alignItems="center">
-        <Text>
-          <strong>Product Image:</strong>
-        </Text>
-        {productImage && (
-          <Image src={productImage} alt="Product" boxSize="50px" ml="2" />
-        )}
-      </Flex>
+
       <Text>
         <strong>Tax:</strong> {tax}
       </Text>

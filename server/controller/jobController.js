@@ -113,9 +113,20 @@ const DeleteJob = async (req, res, next) => {
       if (invoice) {
         await invoice.remove();
       }
+    
     }
     job.isdeleted = true;
     await job.save();
+
+
+    // //update 
+
+    //    const invoice = await invoice.findOne({ invoice: invoiceId });
+    // if (job) {
+    //   job.convertedToInvoice = false;
+    //   await job.save();
+    // }
+
 
     res.status(200).json({ message: Constants.JOB_DELETED_SUCCESSFULLY });
   } catch (error) {
