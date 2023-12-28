@@ -48,7 +48,10 @@ const Constants = {
   CONNECTED_TO_MONGODB: "Connected to MongoDB Atlas!",
   CONNECTION_ERROR_MONGODB: "Error connecting to MongoDB Atlas",
   INVOICE_DELETED_SUCCESSFULLY: "Invoice deleted successfully",
-  PRODUCT_DELETED_SUCCESSFULLY : "product deleted successfully"
+  PRODUCT_DELETED_SUCCESSFULLY : "product deleted successfully",
+  POSITIVE_NUMBER : "Should be positive number",
+  TAGS_FORMAT: 'Tags must be a comma-separated list',
+
 };
 
 module.exports = Constants;

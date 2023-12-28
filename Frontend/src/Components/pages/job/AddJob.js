@@ -13,6 +13,7 @@ import { AddIcon } from "@chakra-ui/icons";
 import { Formik, useFormik } from "formik";
 import axios from "axios";
 import Popup from "../../../Common/Popup";
+import { JobValidationSchema } from "../../../validation /validation";
 
 const initialData = {
   title: "",
@@ -33,8 +34,8 @@ const AddJob = ({ getJObData }) => {
     axios.get("http://localhost:5000/product").then((response) => {
       setProducts(response.data.data);
     });
-  }, [products]); 
-  
+  }, [products]);
+
   const formik = useFormik({
     initialValues: initialData,
     validate: (values) => {
@@ -124,13 +125,7 @@ const AddJob = ({ getJObData }) => {
       <Popup title="Add new job" isOpen={isOpen} onClose={onClose}>
         <Formik
           initialValues={initialData}
-          validate={(values) => {
-            const errors = {};
-            if (!values.title) {
-              errors.title = "Title is Required";
-            }
-            return errors;
-          }}
+          validationSchema={JobValidationSchema}
           onSubmit={(values) => {
             createJob(values, formik);
           }}
@@ -155,6 +150,7 @@ const AddJob = ({ getJObData }) => {
                   onBlur={handleBlur}
                   value={values.title}
                   autoComplete="off"
+                  placeholder="Enter Title"
                 />
                 <Text color="tomato">
                   {errors.title && touched.title && errors.title}
@@ -170,6 +166,7 @@ const AddJob = ({ getJObData }) => {
                   onBlur={handleBlur}
                   value={values.tags}
                   autoComplete="off"
+                  placeholder="Enter Tags ex: one,two,three"
                 />
                 <Text color="tomato">
                   {errors.tags && touched.tags && errors.tags}
@@ -181,6 +178,7 @@ const AddJob = ({ getJObData }) => {
                 <Input
                   type="text"
                   name="notes"
+                  placeholder="Enter Notes"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.notes}

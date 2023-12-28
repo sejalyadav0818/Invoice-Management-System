@@ -7,7 +7,7 @@ import Popup from "../../../Common/Popup";
 const DeleteProduct = ({ productId, getProductsData }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
-  
+
   const confirmDelete = () => {
     axios
       .delete(`http://localhost:5000/product/${productId}`)
@@ -25,25 +25,7 @@ const DeleteProduct = ({ productId, getProductsData }) => {
       .catch((error) => {
         if (error.response) {
           toast({
-            title: error.response.data.message,
-            status: "error",
-            isClosable: true,
-            position: "bottom",
-            duration: 5000,
-          });
-        } else if (error.request) {
-          // The request was made but no response was received
-          toast({
-            title: "No response received from the server",
-            status: "error",
-            isClosable: true,
-            position: "bottom",
-            duration: 5000,
-          });
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          toast({
-            title: "An error occurred while sending the request",
+            title: error.response.message,
             status: "error",
             isClosable: true,
             position: "bottom",

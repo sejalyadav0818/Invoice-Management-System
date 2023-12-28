@@ -44,7 +44,7 @@ const CreateJob = async (req, res, next) => {
 
 const getAllJObs = async (req, res, next) => {
   try {
-    const jobsData = await Job.find({ isdeleted: false }).select("-__v");
+    const jobsData = await Job.find({ isdeleted: false });
     res.status(200).json({ data: jobsData });
   } catch (error) {
     next(error);
@@ -55,7 +55,7 @@ const getJObById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const singleJobData = await Job.findById(id).select("-__v");
+    const singleJobData = await Job.findById(id);
     singleJobData
       ? res.status(200).json({ data: singleJobData })
       : res.status(400).json({ error: Constants.JOB_NOT_FOUND });

@@ -4,18 +4,17 @@ const Constants = require("../utils/constants");
 
 const getAllInvoice = async (req, res, next) => {
   try {
-    const InvoiceData = await Invoice.find({ isdeleted: true }).select("-__v");
+    const InvoiceData = await Invoice.find({ isdeleted: true });
     console.log(InvoiceData);
     res.status(200).json({ data: InvoiceData });
   }  catch (error) {
     console.error(error);
-    res.status(400).json({ message: "Oops, Something went wrong!" });
+    res.status(400).json({ message: Constants.MISSING_FIELDS });
   }
 };
 
 const convertToInvoice = async (req, res, next) => {
   const { jobId  } = req.params;
-console.log(jobId,"fejiljqfjjwdi");
   try {
     const job = await Job.findById(jobId);
 

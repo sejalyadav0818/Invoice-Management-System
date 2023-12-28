@@ -21,7 +21,7 @@ const Createproduct = async (req, res, next) => {
 
 const getAllproducts = async (req, res, next) => {
   try {
-    const productsData = await Product.find({isdeleted : false}).select("-__v");
+    const productsData = await Product.find({isdeleted : false});
     res.status(200).json({ data: productsData });
   } catch (error) {
     next(error);
@@ -32,7 +32,7 @@ const getproductById = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    const singleProductData = await Product.findById(id).select("-__v");
+    const singleProductData = await Product.findById(id);
     singleProductData
       ? res.status(200).json({ data: singleProductData })
       : res.status(400).json({ error: Constants.PRODUCT_NOT_FOUND });
@@ -58,12 +58,13 @@ const updateproduct = async (req, res, next) => {
     next(error);
   }
 };
+
 const deleteproduct = async (req, res, next) => {
   const { id } = req.params;
   try {
     const deleteProduct = await Product.findByIdAndUpdate(
       id,
-      { isDeleted: true },
+      { isdeleted: true },
       { new: true }
     );
 

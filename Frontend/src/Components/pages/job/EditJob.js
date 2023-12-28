@@ -12,6 +12,7 @@ import {
 import { EditIcon } from "@chakra-ui/icons";
 import { Formik } from "formik";
 import Popup from "../../../Common/Popup";
+import  {JobValidationSchema}  from "../../../validation /validation";
 
 const EditJob = ({ jobData, getJObData, updateData }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -44,14 +45,7 @@ const EditJob = ({ jobData, getJObData, updateData }) => {
             subtotal: jobData.subtotal,
             total: jobData.total,
           }}
-          // validate={(values) => {
-          //   const errors = {};
-          //   if (values.title) {
-          //     errors.title = "Title is Required";
-          //   }
-          //   // Add validations for other fields if needed
-          //   return errors;
-          // }}
+          validationSchema={JobValidationSchema}
           onSubmit={(values) => {
             updateData(values);
           }}
@@ -59,7 +53,6 @@ const EditJob = ({ jobData, getJObData, updateData }) => {
           {({
             values,
             errors,
-            isValid,
             touched,
             dirty,
             handleChange,

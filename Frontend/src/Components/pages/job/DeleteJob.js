@@ -12,7 +12,7 @@ const DeleteJob = ({ jobId, getProductsData }) => {
       .then((res) => {
         getProductsData();
         toast({
-          title: res.message,
+          title: res.data.message,
           status: "success",
           isClosable: true,
           position: "bottom",
@@ -30,7 +30,6 @@ const DeleteJob = ({ jobId, getProductsData }) => {
             duration: 5000,
           });
         } else if (error.request) {
-          // The request was made but no response was received
           toast({
             title: "No response received from the server",
             status: "error",
@@ -39,7 +38,6 @@ const DeleteJob = ({ jobId, getProductsData }) => {
             duration: 5000,
           });
         } else {
-          // Something happened in setting up the request that triggered an Error
           toast({
             title: "An error occurred while sending the request",
             status: "error",
